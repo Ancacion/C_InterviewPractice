@@ -87,7 +87,7 @@ int main(int argc, const char * argv[]) {
     printf("x4 = %d.\n\n", x4);
     
     unsigned int x5 = 0b11111111;
-    x5 = clear_bit(x5, 4); // 11111111 -> 11111111 = 255 - 16 = 239
+    x5 = clear_bit(x5, 4); // 11111111 -> 11101111 = 255 - 16 = 239
     printf("x5 = %d.\n\n", x5);
     
     return 0;
