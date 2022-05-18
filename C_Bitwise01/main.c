@@ -12,7 +12,7 @@
   pos: bit position to clear */
 #define CLEARBIT(a, pos) (a &= ~(1 << pos))
 
-void bitwiseConvertCase(char input) {
+void bitwiseConvertCase(char input) { //英文字母大小寫交換
     /* 'z': decimal value 122 (=01111010) */
     //char a = 'z';
 
@@ -26,7 +26,7 @@ void bitwiseConvertCase(char input) {
     printf("AOut = %c\n", AOut);
 }
 
-void xorSwap(int *x, int *y) {
+void xorSwap(int *x, int *y) { //不用額外消耗記憶體的數值交換做法
     *x ^= *y;
     *y ^= *x;
     *x ^= *y;
@@ -55,6 +55,10 @@ void bitwiseLeft() {
     printf("%d\n", (num << 2)); //1010011000, 8 + 16 + 128 + 512
 }
 
+int bitwiseGetBit(uint32_t num, int input) { //取出x在第n位的值
+    return (num >> input) & 1; //1111 1010 1111 1100 右移8位變成 0000 0000 1111 1010, 取最右邊的數字與1做and運算
+}
+
 int main(int argc, const char * argv[]) {
     // insert code here...
     //printf("Hello, World!\n");
@@ -72,6 +76,13 @@ int main(int argc, const char * argv[]) {
     
     bitwiseRight();
     bitwiseLeft();
+    printf("\n");
+    
+    uint32_t num01 = 0xfafc; //1111 1010 1111 1100
+    int checkBit = 0;
+    int num = 9;
+    checkBit = bitwiseGetBit(num01, num - 1);
+    printf("checkBit = %d\n", checkBit);
     
     return 0;
 }
