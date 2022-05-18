@@ -42,7 +42,7 @@ unsigned int get_lower_bit_position(unsigned int x) { //獲得8 bit最低位元�
     return get_highest_bit_position(x); //與補數and運算完後呼叫求最高位元位置的子程式
 }
 
-int numbers_of_1_in_int(unsigned int x) {
+int numbers_of_1_in_int(unsigned int x) { //二進制的時候有多少個1
     int ans = 0, i;
     for(i = 0; i < 8; i++) {
         if(((x >> i) & 1 )== 1) {
@@ -50,6 +50,23 @@ int numbers_of_1_in_int(unsigned int x) {
         }
     }
     return ans;
+}
+
+unsigned int set_bit(unsigned int x, int set) { //設定指定的數字點為1 (新增)
+    return x |= (1 << set); //右移幾格後做or
+    //   00000001 <- 原數
+    // | 00010000 <- 右移4格後
+    //=  00010001 答案
+}
+
+unsigned int clear_bit(unsigned int x, int set) { //設定指定的數字點為0 (清除)
+    return x &= ~(1 << set);  //原數與右移幾格後的not做and
+    //   11111111 <- 原數
+    //   00010000 <- 右移4格後, 11101111 <- NOT運算
+    //----------------
+    //   11111111 <- 原數
+    // & 11101111 <- ~(1 << set)
+    //=  11101111 答案
 }
 
 int main(int argc, const char * argv[]) {
@@ -64,6 +81,14 @@ int main(int argc, const char * argv[]) {
     unsigned int x3 = 0b11111110;
     int x3_1_count = numbers_of_1_in_int(x3);
     printf("x3_1_count = %d.\n\n", x3_1_count);
+    
+    unsigned int x4 = 0b00000001;
+    x4 = set_bit(x4, 4); // 00000001 -> 00010001 = 1 -> 17
+    printf("x4 = %d.\n\n", x4);
+    
+    unsigned int x5 = 0b11111111;
+    x5 = clear_bit(x5, 4); // 11111111 -> 11111111 = 255 - 16 = 239
+    printf("x5 = %d.\n\n", x5);
     
     return 0;
 }
